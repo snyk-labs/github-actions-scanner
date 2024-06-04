@@ -1,0 +1,58 @@
+version: 2.1
+
+orbs:
+  prodsec: snyk/prodsec-orb@1.1
+
+defaults: &defaults
+  resource_class: small
+  docker:
+    - image: cimg/node:22.2.0
+
+jobs:
+  security_scans:
+    <<: *defaults
+    steps:
+      - checkout
+      - prodsec/security_scans:
+          mode: auto
+          iac-scan: disabled
+
+  npm_test:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Install Dependencies
+          command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Run Tests
+          command: npm test
+
+workflows:
+  version: 2
+  CICD:
+    jobs:
+      - prodsec/secrets-scan: # DO NOT REMOVE OR MOVE THIS LINE
+          name: Scan repository for secrets
+          context:
+            - snyk-bot-slack
+          channel: alerts-security-labs
+      - security_scans:
+          name: Security Scans
+          context:
+            - security-labs-snyk
+      - npm_test:
+          name: Run npm test

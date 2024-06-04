@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: github-actions-scanner
+  description: Github Actions Scanner
+  annotations:
+    github.com/project-slug: snyk/github-actions-scanner
+    github.com/team-slug: snyk/security-labs
+    backstage.io/techdocs-ref: dir:.
+  labels:
+    snyk.io/businessCriticality: high
+    snyk.io/visibility: public
+    snyk.io/metadata-version: "2022-23-01"
+spec:
+  type: external-tooling
+  lifecycle: "-"
+  owner: security-labs
