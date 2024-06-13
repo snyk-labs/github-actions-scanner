@@ -137,7 +137,7 @@ To write your own rules, create a new `.mjs` file in the `rules` directory. This
 ```javascript
 class MyRule {
     static id = "MY_RULE";
-    static documentation = "https://github.com/snyk/github-actions-scanner/blob/main/README.md#MY_RULE
+    static documentation = "https://github.com/snyk/github-actions-scanner/blob/main/README.md#MY_RULE"
     
     static async description(finding) {
       // takes a single Finding instance, as defined in finding.mjs. Will always be from those returned by `scan`
