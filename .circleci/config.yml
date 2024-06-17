@@ -20,6 +20,7 @@ jobs:
           command: code test --report
           fail-on-issues: false
           monitor-on-build: false
+          project: snyk-labs/github-actions-analyzer
 
   npm_test:
     <<: *defaults
