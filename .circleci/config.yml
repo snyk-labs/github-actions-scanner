@@ -17,10 +17,9 @@ jobs:
           fail-on-issues: false
           monitor-on-build: true
       - snyk/scan:
-          command: code test --report
+          command: code test --report --project-name=snyk-labs/github-actions-analyzer
           fail-on-issues: false
           monitor-on-build: false
-          project: snyk-labs/github-actions-analyzer
 
   npm_test:
     <<: *defaults
