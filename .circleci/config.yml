@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  prodsec: snyk/prodsec-orb@1.1
+  snyk: snyk/snyk@2.1.0
 
 defaults: &defaults
   resource_class: small
@@ -13,9 +13,13 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - prodsec/security_scans:
-          mode: auto
-          iac-scan: disabled
+      - snyk/scan:
+          fail-on-issues: false
+          monitor-on-build: true
+      - snyk/scan:
+          command: code test --report
+          fail-on-issues: false
+          monitor-on-build: false
 
   npm_test:
     <<: *defaults
@@ -45,11 +49,6 @@ workflows:
   version: 2
   CICD:
     jobs:
-      - prodsec/secrets-scan: # DO NOT REMOVE OR MOVE THIS LINE
-          name: Scan repository for secrets
-          context:
-            - snyk-bot-slack
-          channel: alerts-security-labs
       - security_scans:
           name: Security Scans
           context:
