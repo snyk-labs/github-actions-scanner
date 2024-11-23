@@ -18,7 +18,7 @@
     "gunzip-maybe": "^1.4.2",
     "octokit": "^4.0.2",
     "tar-stream": "^3.1.7",
-    "winston": "^3.13.0",
+    "winston": "^3.16.0",
     "yaml": "^2.5.1"
   },
   "devDependencies": {
