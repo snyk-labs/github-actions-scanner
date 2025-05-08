@@ -1,3 +1,8 @@
+### ❗ **IMPORTANT NOTICE** ❗ ###
+
+This tool was released as part of a research project on Github Actions by the Security Labs team and isn't supported by Snyk products.
+For more details, please follow the Area41 [talk](https://www.youtube.com/watch?v=pUa5P7THc3c&amp;index=4) and Snyk [blog](https://snyk.io/blog/exploring-vulnerabilities-github-actions/).
+
 # Github Actions Scanner
 
 Scans your Github Actions for security issues.
